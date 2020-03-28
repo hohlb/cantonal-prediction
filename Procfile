@@ -1,1 +1,1 @@
-web: streamlit run --server.headless true --server.enableCORS false --server.port 80 cantonal_prediction.py
+web: streamlit run --server.headless true --server.enableCORS false cantonal_prediction.py
