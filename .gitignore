@@ -1,0 +1,7 @@
+.DS_Store
+
+# PyCharm files
+.idea
+
+# Python environment
+conda-env/*
