@@ -2,6 +2,10 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
+
+# ATTENTION
+# this is for now just the uber_pickup tutorial, it will be replaced soon with our actual code
+
 st.title('Uber pickups in NYC')
 
 DATE_COLUMN = 'date/time'
