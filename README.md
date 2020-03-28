@@ -5,7 +5,7 @@ Predict the needed medical equipment against the coronavirus for every canton of
 This app was developed during the [#CodeVsCOVID19 hackathon](https://www.codevscovid19.org/).
 
 
-# Python Setup
+# Setup for Development
 
 If you are using Python 3.6 or higher:
 ```bash
