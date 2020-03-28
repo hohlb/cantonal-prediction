@@ -1,0 +1,1 @@
+web: streamlit run cantonal_prediction.py
