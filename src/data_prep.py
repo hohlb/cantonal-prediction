@@ -12,12 +12,12 @@ def load_data():
 
 def pre_process(data):
     '''create summary rows, transform col to lowercase, create prediciton column'''
+    data.set_index('date', inplace=True)
     df_switzerland = data.sum(level=0)
     df_switzerland['abbreviation_canton_and_fl'] = 'CH'
     data = data.append(df_switzerland)
     lowercase = lambda x: str(x).lower()
     data.rename(lowercase, axis='columns', inplace=True)
-    data.set_index('date', inplace=True)
     data['prediction'] = 0
 
     return data
@@ -50,7 +50,7 @@ def postprocess_data(data):
 def prep_data():
     '''calls all above functions'''
     data = load_data()
-    data = pre_process(data):
+    data = pre_process(data)
     data = predict(data)
     data = transform_data(data)
 
