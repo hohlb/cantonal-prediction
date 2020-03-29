@@ -52,6 +52,6 @@ def prep_data():
     data = load_data()
     data = pre_process(data)
     data = predict(data)
-    data = transform_data(data)
+    data = postprocess_data(data)
 
     return data
