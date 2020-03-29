@@ -9,21 +9,40 @@ This app was developed during the [#CodeVsCOVID19 hackathon](https://www.codevsc
 
 # Setup for Development
 
+First, download or `git clone` this repository to your PC.
+
+Then, install the Python dependencies:
+
 If you are using Python 3.6 or higher:
 ```bash
-pip install streamlit
+# change to codebase directory
+cd cantonal-prediction
+
+# create a virtual Python environment named "venv" in this directory
+python3 -m venv venv
+
+# activate the virtual Python environment we just created
+source venv/bin/activate
+
+# install the Python packages
+pip install -r requirements.txt
 ```
 
 **Or** if you want to use `conda`:
 ```bash
-# create a new conda environment in your current directory
+# change to codebase directory
+cd cantonal-prediction
+
+# create a new conda environment in this directory
 conda create --prefix ./conda-env
 conda activate conda-env/
 conda config --env --add channels conda-forge
 
 # use Python 3.8
 conda install python=3.8
-pip install streamlit
+
+# install the Python packages
+pip install -r requirements.txt
 ```
 
 
@@ -43,6 +62,7 @@ This web app will be deployed automatically
 to https://cantonal-prediction.herokuapp.com/ with every code commit to this GitHub repository.
 
 The automatic deployment was set up via the Heroku dashboard.
+This works even using Heroku's free tier ✨
 
 To configure the Heroku runtime, the files `Procfile`, `requirements.txt`, and `runtime.txt` of
 this repository are used.
