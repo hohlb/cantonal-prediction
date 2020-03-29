@@ -1,14 +1,18 @@
 import streamlit as st
+from src.calc_equip import calc_equip
 
 
-def create_main_area(data, canton, masks, gloves, sanitizer):
+def create_main_area(data, canton, masks, gloves_pair, sanitizer):
     st.title('COVID19 Equipment Calculator')
 
-    # show dataframe filtered by canton
-    st.write(data[data['abbreviation_canton_and_fl'] == canton])
+    # filter by canton
+    region_data = data[data['abbreviation_canton_and_fl'] == canton]
 
-    # this is just to show that we can use the variables
-    # masks, gloves, sanitizer
-    st.write(masks)
-    st.write(gloves)
-    st.write(sanitizer)
+    equip = {
+        'mask': masks,
+        'gloves_pair': gloves_pair,
+        'sanitizer': sanitizer
+    }
+
+    needed_equip = calc_equip(region_data, equip)
+    st.write(needed_equip)
