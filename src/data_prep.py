@@ -11,7 +11,7 @@ def load_data():
     return data
 
 def transform_data(data):
-    '''ensure all col are lowercase, transorm date to index and change all data to numeric, add prediction column'''
+    '''ensure all col are lowercase, transform date to index, change all data to numeric, add prediction column'''
     DATE_COLUMN = 'date'
     lowercase = lambda x: str(x).lower()
     data.rename(lowercase, axis='columns', inplace=True)
@@ -29,11 +29,13 @@ def predict(data):
 
 def calc_equip(data, ratio_dict):
     '''provides rows with prediction results'''
+    pd.to_numeric(data['ncumul_conf'])
     for key, value in ratio_dict.items():
         data[key] = data['ncumul_conf'].apply(lambda x: value * x)
     return data
 
 def prep_all(ratio_dict):
+    '''calls all above functions'''
     data = load_data()
     data = transform_data(data)
     data = predict(data)

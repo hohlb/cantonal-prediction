@@ -13,7 +13,7 @@ st.title('COVID19 Equipment Calculator')
 from src import data_prep
 
 ratio_dict = {'mask_ratio' : 35, 'desinf_ratio' : 0.5, 'overall_ratio': 25}
-data_prep.prep_all(ratio_dict)
+
 
 
 # DATE_COLUMN = 'date'
@@ -33,7 +33,7 @@ data_prep.prep_all(ratio_dict)
 #     return data
 
 data_load_state = st.text('Loading data...')
-data = data_prep.load_data()
+data = data_prep.prep_all(ratio_dict)
 data_load_state.text('Loading data... done!')
 
 if st.checkbox('Show raw data'):
