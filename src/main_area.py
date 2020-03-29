@@ -15,4 +15,14 @@ def create_main_area(data, canton, masks, gloves_pair, sanitizer):
     }
 
     needed_equip = calc_equip(region_data, equip)
+
+    # show needed equipment for the newest time period
+    days = 7
+    recent_period = needed_equip.tail(days)
+    recent_period = recent_period[[
+        'mask', 'gloves_pair', 'sanitizer'
+    ]]
+    st.write(recent_period)
+
+    # show the whole dataframe
     st.write(needed_equip)
