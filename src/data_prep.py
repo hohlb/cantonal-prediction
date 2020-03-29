@@ -38,21 +38,10 @@ def transform_data(data):
     return data
 
 
-def calc_equip(data, ratio_dict):
-    '''provides rows with prediction results'''
-    pd.to_numeric(data['ncumul_conf'])
-
-    for key, value in ratio_dict.items():
-        data[key] = data['ncumul_conf'].apply(lambda x: value * x)
-
-    return data
-
-
-def prep_all(ratio_dict):
+def prep_data():
     '''calls all above functions'''
     data = load_data()
     data = predict(data)
     data = transform_data(data)
-    data = calc_equip(data, ratio_dict)
 
     return data
