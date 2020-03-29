@@ -12,7 +12,7 @@ st.title('COVID19 Equipment Calculator')
 
 from src import data_prep
 
-ratio_dict = {'mask_ratio' : 35, 'desinf_ratio' : 0.5, 'overall_ratio': 25}
+ratio_dict = {'mask' : 35, 'desinfectant' : 0.5, 'overall': 25}
 
 
 
