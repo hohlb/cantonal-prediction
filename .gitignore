@@ -6,3 +6,5 @@
 # Python environments
 conda-env/*
 venv/*
+
+src/__pycache__/*

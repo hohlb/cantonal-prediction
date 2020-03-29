@@ -1,10 +1,21 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+from src.dbarco import dbarco
+from src.aysealemdar import aysealemdar
+from src.bhohl import bhohl
+from src.pandorrasland import pandorrasland
+
+# execute scripts of individual contributors for now via import to avoid lots of git merge conflicts
+# make your edits there
+dbarco()
+aysealemdar()
+bhohl()
+pandorrasland()
 
 
 # ATTENTION
-# this is for now just the uber_pickup tutorial, it will be replaced soon with our actual code
+# the folling is just the uber_pickup tutorial for now, it will be replaced soon with our actual code
 
 st.title('Uber pickups in NYC')
 
