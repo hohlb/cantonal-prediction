@@ -14,7 +14,7 @@ def pre_process(data):
     '''create summary rows, transform col to lowercase, create prediciton column'''
     df_switzerland = data.sum(level=0)
     df_switzerland['abbreviation_canton_and_fl'] = 'CH'
-    data.append(df_switzerland, inplace = True)
+    data = data.append(df_switzerland)
     lowercase = lambda x: str(x).lower()
     data.rename(lowercase, axis='columns', inplace=True)
     data.set_index('date', inplace=True)
