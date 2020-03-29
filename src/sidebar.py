@@ -3,11 +3,11 @@ import pandas as pd
 import requests
 import re
 import src.equipment as eq
+from src.main_area import create_main_area
 
+# TODO replace with data_prep.py
 DATE_COLUMN = 'date'
 resp = requests.get('https://covid19-rest.herokuapp.com/api/openzh/v1/all')
-
-
 # @st.cache
 def load_data():
     data = pd.DataFrame(resp.json()['records'])
@@ -25,28 +25,28 @@ def load_data():
     return data
 
 
-def bhohl():
-    st.title('START bhohl')
+def create_sidebar():
+    sidebar = st.sidebar
+
+    sidebar.markdown("# Frame")
 
     data = load_data()
     cantons = data.abbreviation_canton_and_fl.unique()
-    canton = st.selectbox("Select a canton", cantons, 0)
-    st.write(data[data['abbreviation_canton_and_fl'] == canton])
+    canton = sidebar.selectbox("Select a canton", cantons, 0)
+    create_main_area(data, canton)
 
-    st.slider('Masks (per day, coworker, and patient)',
+    sidebar.slider('Masks (per day, coworker, and patient)',
               min_value=eq.MASKS__PER_DAY_PER_COWORKER_PER_PATIENT__MIN,
               max_value=eq.MASKS__PER_DAY_PER_COWORKER_PER_PATIENT__MAX,
               value=eq.MASKS__PER_DAY_PER_COWORKER_PER_PATIENT__DEFAULT)
 
-    st.slider('Pair of Gloves (per day, coworker, and patient)',
+    sidebar.slider('Pair of Gloves (per day, coworker, and patient)',
               min_value=eq.GLOVES_PAIR__PER_DAY_PER_COWORKER_PER_PATIENT__MIN,
               max_value=eq.GLOVES_PAIR__PER_DAY_PER_COWORKER_PER_PATIENT__MAX,
               value=eq.GLOVES_PAIR__PER_DAY_PER_COWORKER_PER_PATIENT__DEFAULT)
 
-    st.slider('Units of Sanitizer (per day, coworker, and patient)',
+    sidebar.slider('Units of Sanitizer (per day, coworker, and patient)',
               min_value=eq.SANITIZER_UNITS__PER_DAY_PER_COWORKER_PER_PATIENT__MIN,
               max_value=eq.SANITIZER_UNITS__PER_DAY_PER_COWORKER_PER_PATIENT__MAX,
               value=eq.SANITIZER_UNITS__PER_DAY_PER_COWORKER_PER_PATIENT__DEFAULT,
               step=eq.SANITIZER_UNITS__PER_DAY_PER_COWORKER_PER_PATIENT__STEP)
-
-    st.title('END bhohl')
