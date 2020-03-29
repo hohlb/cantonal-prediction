@@ -51,7 +51,7 @@ def predict(data):
     data = data.reset_index()
     data.sort_values(by=['date'], inplace = True)
     for canton in data.abbreviation_canton_and_fl.unique():
-        add = [{'date': growth_values_dict[canton][-1:].index[0] + datetime.timedelta(days=1), 'abbreviation_canton_and_fl' : canton, 'ncumul_conf' : (growth_rate_dict[canton] * (growth_values_dict[canton][-1])), 'prediction' : 1}]
+        add = [{'date': growth_values_dict[canton][-1:].index[0] + datetime.timedelta(days=1), 'abbreviation_canton_and_fl' : canton, 'ncumul_conf' : int(growth_rate_dict[canton] * (growth_values_dict[canton][-1])), 'prediction' : 1}]
         data = data.append(add)
     data.sort_values(by=['date'], inplace = True)
     data.set_index('date', inplace = True)
