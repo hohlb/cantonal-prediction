@@ -10,6 +10,18 @@ def load_data():
 
     return data
 
+def pre_process(data):
+    '''create summary rows, transform col to lowercase, create prediciton column'''
+    df_switzerland = data.sum(level=0)
+    df_switzerland['abbreviation_canton_and_fl'] = 'CH'
+    data.append(df_switzerland, inplace = True)
+    lowercase = lambda x: str(x).lower()
+    data.rename(lowercase, axis='columns', inplace=True)
+    data.set_index('date', inplace=True)
+    data['prediction'] = 0
+
+    return data
+
 
 def predict(data):
     '''provides rows with prediction results'''
@@ -21,11 +33,9 @@ def predict(data):
     return data
 
 
-def transform_data(data):
+def postprocess_data(data):
     '''ensure all col are lowercase, transform date to index, and change all data to numeric, add prediction column'''
     DATE_COLUMN = 'date'
-    lowercase = lambda x: str(x).lower()
-    data.rename(lowercase, axis='columns', inplace=True)
     data[DATE_COLUMN] = pd.to_datetime(data[DATE_COLUMN])
 
     for column in list(data.columns.values):
@@ -33,7 +43,6 @@ def transform_data(data):
             data[column] = pd.to_numeric(data[column])
 
     data.set_index('date', inplace=True)
-    data['prediction'] = 0
 
     return data
 
@@ -41,6 +50,7 @@ def transform_data(data):
 def prep_data():
     '''calls all above functions'''
     data = load_data()
+    data = pre_process(data):
     data = predict(data)
     data = transform_data(data)
 
