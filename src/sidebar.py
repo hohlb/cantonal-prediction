@@ -23,8 +23,8 @@ def create_equipment_inputs(sidebar):
 
 
 def create_canton_selector(sidebar, data):
-    cantons = data.abbreviation_canton_and_fl.unique()
-    canton = sidebar.selectbox("Select a canton", cantons, 0)
+    cantons = sorted(data.abbreviation_canton_and_fl.unique())
+    canton = sidebar.selectbox("Select a canton", cantons, index = cantons.index('CH'))
 
     return canton
 
