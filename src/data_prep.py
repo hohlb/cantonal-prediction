@@ -49,11 +49,12 @@ def predict(data):
                 valid_diff_list.append(elem)
         growth_rate_dict[key] = sum(valid_diff_list) / float(len(valid_diff_list))
     data = data.reset_index()
+    data.sort_values(by=['date'], inplace = True)
     for canton in data.abbreviation_canton_and_fl.unique():
-        print('Canton: ' + str(canton) + ' growth rate: ' + str(growth_rate_dict[canton]) + ' today: ' + str(growth_values_dict[canton][-1]) + ' tomorrow: ' + str(growth_rate_dict[canton] * (growth_values_dict[canton][-1])))
-        add = [{'date': datetime.datetime.now() + datetime.timedelta(days=1), 'abbreviation_canton_and_fl' : canton, 'ncumul_conf' : (growth_rate_dict[canton] * (growth_values_dict[canton][-1])), 'prediction' : 1}]
+        add = [{'date': growth_values_dict[canton][-1:].index[0] + datetime.timedelta(days=1), 'abbreviation_canton_and_fl' : canton, 'ncumul_conf' : (growth_rate_dict[canton] * (growth_values_dict[canton][-1])), 'prediction' : 1}]
         data = data.append(add)
-    data.set_index('date', inplace = True) 
+    data.sort_values(by=['date'], inplace = True)
+    data.set_index('date', inplace = True)
     return data
 
 
