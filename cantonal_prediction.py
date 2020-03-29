@@ -6,7 +6,7 @@ from src.main_area import create_main_area
 data = prep_data()
 
 # create sidebar
-canton, masks, gloves, sanitizer = create_sidebar(data)
+canton, masks, gloves_pair, sanitizer = create_sidebar(data)
 
 # create main area
-create_main_area(data, canton, masks, gloves, sanitizer)
+create_main_area(data, canton, masks, gloves_pair, sanitizer)

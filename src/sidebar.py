@@ -8,7 +8,7 @@ def create_equipment_inputs(sidebar):
               max_value=eq.MASKS__PER_DAY_PER_COWORKER_PER_PATIENT__MAX,
               value=eq.MASKS__PER_DAY_PER_COWORKER_PER_PATIENT__DEFAULT)
 
-    gloves = sidebar.slider('Pair of Gloves (per day, coworker, and patient)',
+    gloves_pair = sidebar.slider('Pair of Gloves (per day, coworker, and patient)',
               min_value=eq.GLOVES_PAIR__PER_DAY_PER_COWORKER_PER_PATIENT__MIN,
               max_value=eq.GLOVES_PAIR__PER_DAY_PER_COWORKER_PER_PATIENT__MAX,
               value=eq.GLOVES_PAIR__PER_DAY_PER_COWORKER_PER_PATIENT__DEFAULT)
@@ -19,7 +19,7 @@ def create_equipment_inputs(sidebar):
               value=eq.SANITIZER_UNITS__PER_DAY_PER_COWORKER_PER_PATIENT__DEFAULT,
               step=eq.SANITIZER_UNITS__PER_DAY_PER_COWORKER_PER_PATIENT__STEP)
 
-    return masks, gloves, sanitizer
+    return masks, gloves_pair, sanitizer
 
 
 def create_canton_selector(sidebar, data):
@@ -35,6 +35,6 @@ def create_sidebar(data):
     sidebar.markdown("# Frame")
 
     canton = create_canton_selector(sidebar, data)
-    masks, gloves, sanitizer = create_equipment_inputs(sidebar)
+    masks, gloves_pair, sanitizer = create_equipment_inputs(sidebar)
 
-    return canton, masks, gloves, sanitizer
+    return canton, masks, gloves_pair, sanitizer
