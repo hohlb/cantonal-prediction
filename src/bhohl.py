@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import requests
 import re
-
+import src.equipment as eq
 
 DATE_COLUMN = 'date'
 resp = requests.get('https://covid19-rest.herokuapp.com/api/openzh/v1/all')
@@ -22,11 +22,7 @@ def load_data():
 
     data.set_index('date', inplace = True)
 
-    #data.rename(columns={'ncumul_conf': 'confirmed', 'ncumul_deceased': 'deaths',
-    # 'abbreviation_canton_and_fl' : 'country'}, inplace=True)
     return data
-
-
 
 
 def bhohl():
@@ -36,5 +32,21 @@ def bhohl():
     cantons = data.abbreviation_canton_and_fl.unique()
     canton = st.selectbox("Select a canton", cantons, 0)
     st.write(data[data['abbreviation_canton_and_fl'] == canton])
+
+    st.slider('Masks (per day, coworker, and patient)',
+              min_value=eq.MASKS__PER_DAY_PER_COWORKER_PER_PATIENT__MIN,
+              max_value=eq.MASKS__PER_DAY_PER_COWORKER_PER_PATIENT__MAX,
+              value=eq.MASKS__PER_DAY_PER_COWORKER_PER_PATIENT__DEFAULT)
+
+    st.slider('Pair of Gloves (per day, coworker, and patient)',
+              min_value=eq.GLOVES_PAIR__PER_DAY_PER_COWORKER_PER_PATIENT__MIN,
+              max_value=eq.GLOVES_PAIR__PER_DAY_PER_COWORKER_PER_PATIENT__MAX,
+              value=eq.GLOVES_PAIR__PER_DAY_PER_COWORKER_PER_PATIENT__DEFAULT)
+
+    st.slider('Units of Sanitizer (per day, coworker, and patient)',
+              min_value=eq.SANITIZER_UNITS__PER_DAY_PER_COWORKER_PER_PATIENT__MIN,
+              max_value=eq.SANITIZER_UNITS__PER_DAY_PER_COWORKER_PER_PATIENT__MAX,
+              value=eq.SANITIZER_UNITS__PER_DAY_PER_COWORKER_PER_PATIENT__DEFAULT,
+              step=eq.SANITIZER_UNITS__PER_DAY_PER_COWORKER_PER_PATIENT__STEP)
 
     st.title('END bhohl')
