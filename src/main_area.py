@@ -23,6 +23,3 @@ def create_main_area(data, canton, masks, gloves_pair, sanitizer):
         'mask', 'gloves_pair', 'sanitizer'
     ]]
     st.write(recent_period)
-
-    # show the whole dataframe
-    st.write(needed_equip)
