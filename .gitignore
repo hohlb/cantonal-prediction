@@ -3,5 +3,6 @@
 # PyCharm files
 .idea
 
-# Python environment
+# Python environments
 conda-env/*
+venv/*
