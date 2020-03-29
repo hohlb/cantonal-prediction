@@ -25,16 +25,7 @@ def load_data():
     return data
 
 
-def create_sidebar():
-    sidebar = st.sidebar
-
-    sidebar.markdown("# Frame")
-
-    data = load_data()
-    cantons = data.abbreviation_canton_and_fl.unique()
-    canton = sidebar.selectbox("Select a canton", cantons, 0)
-    create_main_area(data, canton)
-
+def create_equipment_inputs(sidebar):
     sidebar.slider('Masks (per day, coworker, and patient)',
               min_value=eq.MASKS__PER_DAY_PER_COWORKER_PER_PATIENT__MIN,
               max_value=eq.MASKS__PER_DAY_PER_COWORKER_PER_PATIENT__MAX,
@@ -50,3 +41,19 @@ def create_sidebar():
               max_value=eq.SANITIZER_UNITS__PER_DAY_PER_COWORKER_PER_PATIENT__MAX,
               value=eq.SANITIZER_UNITS__PER_DAY_PER_COWORKER_PER_PATIENT__DEFAULT,
               step=eq.SANITIZER_UNITS__PER_DAY_PER_COWORKER_PER_PATIENT__STEP)
+
+
+def create_canton_selector(sidebar):
+    data = load_data()
+    cantons = data.abbreviation_canton_and_fl.unique()
+    canton = sidebar.selectbox("Select a canton", cantons, 0)
+    create_main_area(data, canton)
+
+
+def create_sidebar():
+    sidebar = st.sidebar
+
+    sidebar.markdown("# Frame")
+
+    create_canton_selector(sidebar)
+    create_equipment_inputs(sidebar)
