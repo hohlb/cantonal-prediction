@@ -13,7 +13,7 @@ def create_equipment_inputs(sidebar):
               max_value=eq.GLOVES_PAIR__PER_DAY_PER_PER_PATIENT__MAX,
               value=eq.GLOVES_PAIR__PER_DAY_PER_PER_PATIENT__DEFAULT)
 
-    sanitizer = sidebar.slider('Units of Sanitizer (per day and patient)',
+    sanitizer = sidebar.slider('Liters of Sanitizer (per day and patient)',
               min_value=eq.SANITIZER_UNITS__PER_DAY_PER_PER_PATIENT__MIN,
               max_value=eq.SANITIZER_UNITS__PER_DAY_PER_PER_PATIENT__MAX,
               value=eq.SANITIZER_UNITS__PER_DAY_PER_PER_PATIENT__DEFAULT,
