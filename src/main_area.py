@@ -1,16 +1,35 @@
 import os.path
+from pandas import Timestamp
 import streamlit as st
 from src.calc_equip import calculate_needed_equipment
 
 
 def create_main_area(data, canton, masks, gloves_pair, sanitizer, hospitalized):
+    needed_equipment = calculate_needed_equipment(data, canton, masks, gloves_pair, sanitizer, hospitalized)
+    day = get_day(needed_equipment)
+
     st.title('COVID19 Equipment Predictor')
 
     st.write(f"Selected Region: {canton}")
 
-    needed_equipment = calculate_needed_equipment(data, canton, masks, gloves_pair, sanitizer, hospitalized)
+    st.markdown(f"## Needed Equipment on {day}")
+
     place_icons(needed_equipment)
+
     st.write(needed_equipment)
+
+
+def get_furthest_prediction(needed_equipment):
+    return needed_equipment.tail(1)
+
+
+def get_day(needed_equipment):
+    furthest_prediction = get_furthest_prediction(needed_equipment)
+    day = furthest_prediction.index.values[0]
+    day = Timestamp(day).to_pydatetime()
+    day = day.strftime("%A, %d %B %Y")
+
+    return day
 
 
 def place_icons(needed_equipment):
@@ -35,7 +54,7 @@ def place_icons(needed_equipment):
 
 
 def needed_equipment_count(needed_equipment, column, name):
-    furthest_prediction = needed_equipment.tail(1)
+    furthest_prediction = get_furthest_prediction(needed_equipment)
     equipment_count = int(furthest_prediction.iloc[0][column])
     equipment_count = f"{equipment_count:,}".replace(',', "'")  # separate thousands with ' (TODO use locale to determine separators)
 
@@ -46,7 +65,7 @@ def style_icons(image_width):
     # since streamlit is lacking a grid as for now,
     # we use CSS via markdown to style the icons
 
-    position_of_first_icon = 3
+    position_of_first_icon = 4
 
     css = f"""
     <style>
