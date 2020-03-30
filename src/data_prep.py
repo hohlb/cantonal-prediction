@@ -28,18 +28,24 @@ def pre_process(data):
     lowercase = lambda x: str(x).lower()
     data.rename(lowercase, axis='columns', inplace=True)
     data['prediction'] = 0
+
+    data['released_cases'] = data['ncumul_released'].fillna(method='ffill').fillna(0)
+    data['deceased_cases'] = data['ncumul_deceased'].fillna(method='ffill').fillna(0)
+    data['active_cases'] = data['ncumul_conf'] - data['released_cases'] - data['deceased_cases']
+
     data.sort_values(by=['date'], inplace = True)
+
     return data
 
 
 def predict(data):
-    '''provides rows with prediction results'''    
+    '''provides rows with prediction results'''
     growth_values_dict = {}
     growth_rate_dict = {}
     last_growth_dict = {}
     for canton in data.abbreviation_canton_and_fl.unique():
-        growth_values_dict[canton]  = data[data['abbreviation_canton_and_fl'] == canton].sort_values(by=['date'])['ncumul_conf'][-8:]
-        last_growth_dict[canton]  = data[data['abbreviation_canton_and_fl'] == canton].sort_values(by=['date'])['ncumul_conf'][-1:].index[0]
+        growth_values_dict[canton]  = data[data['abbreviation_canton_and_fl'] == canton].sort_values(by=['date'])['active_cases'][-8:]
+        last_growth_dict[canton]  = data[data['abbreviation_canton_and_fl'] == canton].sort_values(by=['date'])['active_cases'][-1:].index[0]
     for key, value in growth_values_dict.items():
         diff_list = []
         valid_diff_list = []
@@ -53,23 +59,29 @@ def predict(data):
     data = data.reset_index()
     data.sort_values(by=['date'], inplace = True)
     for canton in data.abbreviation_canton_and_fl.unique():
-        #predict all values to 
+        #predict all values to
         if growth_values_dict[canton][-1:].index[0] < datetime.datetime.now() and canton == 'CH':
             last_reliable_date = growth_values_dict[min(last_growth_dict, key=last_growth_dict.get)][-1:].index[0]
-            last_reliable_number = growth_values_dict['CH'][last_reliable_date] 
+            last_reliable_number = growth_values_dict['CH'][last_reliable_date]
             for new_row in range(0, ((last_reliable_date - datetime.datetime.now()).days * -1) + 1):
-                add = [{'date': last_reliable_date + datetime.timedelta(days=new_row), 
-                        'abbreviation_canton_and_fl' : canton, 
-                        'ncumul_conf' : int(growth_rate_dict['CH'] * last_reliable_number) , 
+                add = [{'date': last_reliable_date + datetime.timedelta(days=new_row),
+                        'abbreviation_canton_and_fl' : canton,
+                        'active_cases' : int(growth_rate_dict['CH'] * last_reliable_number) ,
                         'prediction' : 1}]
                 last_reliable_number = growth_rate_dict['CH'] * last_reliable_number
-                data = data.append(add) 
+                data = data.append(add)
         else:
-            add = [{'date': growth_values_dict[canton][-1:].index[0] + datetime.timedelta(days=1), 'abbreviation_canton_and_fl' : canton, 'ncumul_conf' : int(growth_rate_dict[canton] * (growth_values_dict[canton][-1])), 'prediction' : 1}]
+            add = [{
+                    'date': growth_values_dict[canton][-1:].index[0] + datetime.timedelta(days=1),
+                    'abbreviation_canton_and_fl' : canton,
+                    'active_cases' : int(growth_rate_dict[canton] * (growth_values_dict[canton][-1])),
+                    'prediction' : 1
+            }]
             data = data.append(add)
-            
+
     data.sort_values(by=['date'], inplace = True)
     data.set_index('date', inplace = True)
+
     return data
 
 

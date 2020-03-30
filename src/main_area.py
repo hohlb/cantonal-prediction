@@ -22,7 +22,7 @@ def create_main_area(data, canton, masks, gloves_pair, sanitizer, hospitalized):
 
 
 def display_cases(needed_equipment):
-    cases = needed_equipment['ncumul_conf']
+    cases = needed_equipment['active_cases']
     cases = cases.rename('Cases')
 
     # visual separation
@@ -30,7 +30,7 @@ def display_cases(needed_equipment):
     st.markdown('')
     st.markdown('')
 
-    st.text("Currently Hospitalized Cases")
+    st.text("Currently Active Cases")
     st.bar_chart(cases)
 
 
