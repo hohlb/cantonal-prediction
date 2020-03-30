@@ -6,6 +6,8 @@ from src.calc_equip import calculate_needed_equipment
 def create_main_area(data, canton, masks, gloves_pair, sanitizer):
     st.title('COVID19 Equipment Predictor')
 
+    st.write(f"Selected Region: {canton}")
+
     place_icons()
 
     needed_equipment = calculate_needed_equipment(data, canton, masks, gloves_pair, sanitizer)
@@ -37,20 +39,22 @@ def style_icons(image_width):
     # since streamlit is lacking a grid as for now,
     # we use CSS via markdown to style the icons
 
+    position_of_first_icon = 3
+
     css = f"""
     <style>
         /* align icons horizontally */
 
-        .main .element-container:nth-of-type(2),
-        .main .element-container:nth-of-type(3),
-        .main .element-container:nth-of-type(4) {{
+        .main .element-container:nth-of-type({position_of_first_icon}),
+        .main .element-container:nth-of-type({position_of_first_icon + 1}),
+        .main .element-container:nth-of-type({position_of_first_icon + 2}) {{
             display: table-cell;
             width: {image_width}px !important;
         }}
 
-        .main .element-container:nth-of-type(2) > .fullScreenFrame > div,
-        .main .element-container:nth-of-type(3) > .fullScreenFrame > div,
-        .main .element-container:nth-of-type(4) > .fullScreenFrame > div {{
+        .main .element-container:nth-of-type({position_of_first_icon}) > .fullScreenFrame > div,
+        .main .element-container:nth-of-type({position_of_first_icon + 1}) > .fullScreenFrame > div,
+        .main .element-container:nth-of-type({position_of_first_icon + 2}) > .fullScreenFrame > div {{
             width: {image_width}px !important;
         }}
     </style>
