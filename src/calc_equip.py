@@ -3,8 +3,6 @@ import pandas as pd
 
 def calc_equip(data, equip, hospitalized_percentage):
     '''provides rows with prediction results'''
-    pd.to_numeric(data['ncumul_conf'])
-
     hospitalized_ratio = hospitalized_percentage / 100
 
     for key, value in equip.items():
