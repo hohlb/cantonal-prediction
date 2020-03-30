@@ -40,12 +40,14 @@ def style_icons(image_width):
     css = f"""
     <style>
         /* align icons horizontally */
+
         .main .element-container:nth-of-type(2),
         .main .element-container:nth-of-type(3),
         .main .element-container:nth-of-type(4) {{
             display: table-cell;
             width: {image_width}px !important;
         }}
+
         .main .element-container:nth-of-type(2) > .fullScreenFrame > div,
         .main .element-container:nth-of-type(3) > .fullScreenFrame > div,
         .main .element-container:nth-of-type(4) > .fullScreenFrame > div {{
