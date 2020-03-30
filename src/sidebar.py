@@ -37,7 +37,7 @@ def create_canton_selector(sidebar, data):
 def create_sidebar(data):
     sidebar = st.sidebar
 
-    sidebar.markdown("# Frame")
+    sidebar.title("Settings")
 
     canton = create_canton_selector(sidebar, data)
     inputs = canton, *create_inputs(sidebar)
