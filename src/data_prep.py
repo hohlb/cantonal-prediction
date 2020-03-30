@@ -22,22 +22,18 @@ def pre_process(data):
     for column in list(data.columns.values):
         if re.search("ncumul|ninst|Total", column):
             data[column] = pd.to_numeric(data[column])
-
-    # # all of Switzerlands cases
-    # df_switzerland = data.sum(level=0)
-    # df_switzerland['abbreviation_canton_and_fl'] = 'CH'
-    # data = data.append(df_switzerland)
-
+    df_switzerland = data.sum(level=0)
+    df_switzerland['abbreviation_canton_and_fl'] = 'CH'
+    data = data.append(df_switzerland)
     lowercase = lambda x: str(x).lower()
     data.rename(lowercase, axis='columns', inplace=True)
     data['prediction'] = 0
     data.sort_values(by=['date'], inplace = True)
-
     return data
 
 
 def predict(data):
-    '''provides rows with prediction results'''
+    '''provides rows with prediction results'''    
     growth_values_dict = {}
     growth_rate_dict = {}
     for canton in data.abbreviation_canton_and_fl.unique():
@@ -59,7 +55,6 @@ def predict(data):
         data = data.append(add)
     data.sort_values(by=['date'], inplace = True)
     data.set_index('date', inplace = True)
-    
     return data
 
 
