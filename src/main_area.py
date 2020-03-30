@@ -37,6 +37,7 @@ def place_icons(needed_equipment):
 def needed_equipment_count(needed_equipment, column, name):
     furthest_prediction = needed_equipment.tail(1)
     equipment_count = int(furthest_prediction.iloc[0][column])
+    equipment_count = f"{equipment_count:,}".replace(',', "'")  # separate thousands with ' (TODO use locale to determine separators)
 
     return f"{equipment_count} {name}"
 
