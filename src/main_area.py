@@ -13,6 +13,9 @@ def create_main_area(data, canton, masks, gloves_pair, sanitizer, hospitalized):
     st.markdown(f"## Needed Equipment on {day}")
     st.write(f"Region: {canton}")
 
+    # visual separation
+    st.markdown('')
+
     place_icons(needed_equipment)
 
     display_cases(needed_equipment)
@@ -22,7 +25,12 @@ def display_cases(needed_equipment):
     cases = needed_equipment['ncumul_conf']
     cases = cases.rename('Cases')
 
-    st.markdown(f"### Cases development")
+    # visual separation
+    st.markdown('')
+    st.markdown('')
+    st.markdown('')
+
+    st.text("Currently Hospitalized Cases")
     st.bar_chart(cases)
 
 
@@ -72,7 +80,7 @@ def style_icons(image_width):
     # since streamlit is lacking a grid as for now,
     # we use CSS via markdown to style the icons
 
-    position_of_first_icon = 4
+    position_of_first_icon = 5
 
     css = f"""
     <style>
@@ -89,6 +97,16 @@ def style_icons(image_width):
         .main .element-container:nth-of-type({position_of_first_icon + 1}) > .fullScreenFrame > div,
         .main .element-container:nth-of-type({position_of_first_icon + 2}) > .fullScreenFrame > div {{
             width: {image_width}px !important;
+        }}
+
+
+        /* style icon caption */
+
+        .main .element-container:nth-of-type({position_of_first_icon}) .image-container .caption,
+        .main .element-container:nth-of-type({position_of_first_icon + 1}) .image-container .caption,
+        .main .element-container:nth-of-type({position_of_first_icon + 2}) .image-container .caption {{
+            font-weight: 700;
+            font-size: 1em;
         }}
     </style>
     """

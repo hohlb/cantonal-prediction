@@ -8,16 +8,25 @@ def create_inputs(sidebar):
               max_value=eq.MASKS__PER_DAY_PER_PER_PATIENT__MAX,
               value=eq.MASKS__PER_DAY_PER_PER_PATIENT__DEFAULT)
 
+    # visual separation
+    sidebar.markdown('')
+
     gloves_pair = sidebar.slider('Pairs of Gloves (per day and patient)',
               min_value=eq.GLOVES_PAIR__PER_DAY_PER_PER_PATIENT__MIN,
               max_value=eq.GLOVES_PAIR__PER_DAY_PER_PER_PATIENT__MAX,
               value=eq.GLOVES_PAIR__PER_DAY_PER_PER_PATIENT__DEFAULT)
+
+    # visual separation
+    sidebar.markdown('')
 
     sanitizer = sidebar.slider('Liters of Sanitizer (per day and patient)',
               min_value=eq.SANITIZER_UNITS__PER_DAY_PER_PER_PATIENT__MIN,
               max_value=eq.SANITIZER_UNITS__PER_DAY_PER_PER_PATIENT__MAX,
               value=eq.SANITIZER_UNITS__PER_DAY_PER_PER_PATIENT__DEFAULT,
               step=eq.SANITIZER_UNITS__PER_DAY_PER_PER_PATIENT__STEP)
+
+    # visual separation
+    sidebar.markdown('')
 
     hospitalized = sidebar.slider('Percentage of Hospitalized Cases',
               min_value=eq.HOSPITALIZED_CASES_PERCENTAGE__MIN,
@@ -39,7 +48,17 @@ def create_sidebar(data):
 
     sidebar.title("Settings")
 
+    # visual separation
+    sidebar.markdown('')
+    sidebar.markdown('')
+
     canton = create_canton_selector(sidebar, data)
+
+    # visual separation
+    sidebar.markdown('')
+    sidebar.markdown('')
+    sidebar.markdown('')
+
     inputs = canton, *create_inputs(sidebar)
 
     return inputs
