@@ -27,3 +27,29 @@ def place_icons():
     st.image(os.path.join(icons_directory, 'sanitizer.png'),
              width=200,
              caption="Sanitizer")
+
+    style_icons()
+
+
+def style_icons():
+    # since streamlit is lacking a grid as for now,
+    # we use CSS via markdown to style the icons
+
+    css = """
+    <style>
+        /* align icons horizontally */
+        .main .element-container:nth-of-type(2),
+        .main .element-container:nth-of-type(3),
+        .main .element-container:nth-of-type(4) {
+            display: table-cell;
+            width: 200px !important;
+        }
+        .main .element-container:nth-of-type(2) > .fullScreenFrame > div,
+        .main .element-container:nth-of-type(3) > .fullScreenFrame > div,
+        .main .element-container:nth-of-type(4) > .fullScreenFrame > div {
+            width: 200px !important;
+        }
+    </style>
+    """
+
+    st.markdown(css, unsafe_allow_html=True)
