@@ -8,13 +8,12 @@ def create_main_area(data, canton, masks, gloves_pair, sanitizer):
 
     st.write(f"Selected Region: {canton}")
 
-    place_icons()
-
     needed_equipment = calculate_needed_equipment(data, canton, masks, gloves_pair, sanitizer)
+    place_icons(needed_equipment)
     st.write(needed_equipment)
 
 
-def place_icons():
+def place_icons(needed_equipment):
     script_directory = os.path.dirname(__file__)
     icons_directory = os.path.join(script_directory, '..', 'icons')
 
@@ -22,17 +21,24 @@ def place_icons():
 
     st.image(os.path.join(icons_directory, 'mask.jpg'),
              width=image_width,
-             caption="Masks")
+             caption=needed_equipment_count(needed_equipment, 'masks', 'Masks'))
 
     st.image(os.path.join(icons_directory, 'gloves.jpg'),
              width=image_width,
-             caption="Gloves")
+             caption=needed_equipment_count(needed_equipment, 'gloves_pairs', 'Pairs of Gloves'))
 
     st.image(os.path.join(icons_directory, 'sanitizer.png'),
              width=image_width,
-             caption="Sanitizer")
+             caption=needed_equipment_count(needed_equipment, 'sanitizers', 'Liters of Sanitizer'))
 
     style_icons(image_width)
+
+
+def needed_equipment_count(needed_equipment, column, name):
+    furthest_prediction = needed_equipment.tail(1)
+    equipment_count = int(furthest_prediction.iloc[0][column])
+
+    return f"{equipment_count} {name}"
 
 
 def style_icons(image_width):

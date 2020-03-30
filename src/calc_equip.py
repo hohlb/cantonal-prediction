@@ -16,9 +16,9 @@ def calculate_needed_equipment(data, canton, masks, gloves_pair, sanitizer):
     region_data = data[data['abbreviation_canton_and_fl'] == canton]
 
     equip = {
-        'mask': masks,
-        'gloves_pair': gloves_pair,
-        'sanitizer': sanitizer
+        'masks': masks,
+        'gloves_pairs': gloves_pair,
+        'sanitizers': sanitizer
     }
 
     needed_equip = calc_equip(region_data, equip)
@@ -27,7 +27,7 @@ def calculate_needed_equipment(data, canton, masks, gloves_pair, sanitizer):
     days = 7
     recent_period = needed_equip.tail(days)
     recent_period = recent_period[[
-        'mask', 'gloves_pair', 'sanitizer'
+        'masks', 'gloves_pairs', 'sanitizers'
     ]]
 
     return recent_period
