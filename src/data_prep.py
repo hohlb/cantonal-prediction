@@ -22,9 +22,11 @@ def pre_process(data):
     for column in list(data.columns.values):
         if re.search("ncumul|ninst|Total", column):
             data[column] = pd.to_numeric(data[column])
-    df_switzerland = data.sum(level=0)
-    df_switzerland['abbreviation_canton_and_fl'] = 'CH'
-    data = data.append(df_switzerland)
+
+    # df_switzerland = data.sum(level=0)
+    # df_switzerland['abbreviation_canton_and_fl'] = 'CH'
+    # data = data.append(df_switzerland)
+
     lowercase = lambda x: str(x).lower()
     data.rename(lowercase, axis='columns', inplace=True)
     data['prediction'] = 0
@@ -55,17 +57,17 @@ def predict(data):
     data.sort_values(by=['date'], inplace = True)
     for canton in data.abbreviation_canton_and_fl.unique():
         #predict all values to
-        if growth_values_dict[canton][-1:].index[0] < datetime.datetime.now() and canton == 'CH':
-            last_reliable_date = growth_values_dict[min(last_growth_dict, key=last_growth_dict.get)][-1:].index[0]
-            last_reliable_number = growth_values_dict['CH'][last_reliable_date]
-            for new_row in range(0, ((last_reliable_date - datetime.datetime.now()).days * -1) + 1):
-                add = [{'date': last_reliable_date + datetime.timedelta(days=new_row),
-                        'abbreviation_canton_and_fl' : canton,
-                        'ncumul_conf' : int(growth_rate_dict['CH'] * last_reliable_number) ,
-                        'prediction' : 1}]
-                last_reliable_number = growth_rate_dict['CH'] * last_reliable_number
-                data = data.append(add)
-        else:
+        # if growth_values_dict[canton][-1:].index[0] < datetime.datetime.now() and canton == 'CH':
+        #     last_reliable_date = growth_values_dict[min(last_growth_dict, key=last_growth_dict.get)][-1:].index[0]
+        #     last_reliable_number = growth_values_dict['CH'][last_reliable_date]
+        #     for new_row in range(0, ((last_reliable_date - datetime.datetime.now()).days * -1) + 1):
+        #         add = [{'date': last_reliable_date + datetime.timedelta(days=new_row),
+        #                 'abbreviation_canton_and_fl' : canton,
+        #                 'ncumul_conf' : int(growth_rate_dict['CH'] * last_reliable_number) ,
+        #                 'prediction' : 1}]
+        #         last_reliable_number = growth_rate_dict['CH'] * last_reliable_number
+        #         data = data.append(add)
+        # else:
             add = [{
                     'date': growth_values_dict[canton][-1:].index[0] + datetime.timedelta(days=1),
                     'abbreviation_canton_and_fl' : canton,
