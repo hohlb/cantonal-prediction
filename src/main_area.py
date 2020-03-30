@@ -16,39 +16,41 @@ def place_icons():
     script_directory = os.path.dirname(__file__)
     icons_directory = os.path.join(script_directory, '..', 'icons')
 
+    image_width = 200  # pixels
+
     st.image(os.path.join(icons_directory, 'mask.jpg'),
-             width=200,
+             width=image_width,
              caption="Masks")
 
     st.image(os.path.join(icons_directory, 'gloves.jpg'),
-             width=200,
+             width=image_width,
              caption="Gloves")
 
     st.image(os.path.join(icons_directory, 'sanitizer.png'),
-             width=200,
+             width=image_width,
              caption="Sanitizer")
 
-    style_icons()
+    style_icons(image_width)
 
 
-def style_icons():
+def style_icons(image_width):
     # since streamlit is lacking a grid as for now,
     # we use CSS via markdown to style the icons
 
-    css = """
+    css = f"""
     <style>
         /* align icons horizontally */
         .main .element-container:nth-of-type(2),
         .main .element-container:nth-of-type(3),
-        .main .element-container:nth-of-type(4) {
+        .main .element-container:nth-of-type(4) {{
             display: table-cell;
-            width: 200px !important;
-        }
+            width: {image_width}px !important;
+        }}
         .main .element-container:nth-of-type(2) > .fullScreenFrame > div,
         .main .element-container:nth-of-type(3) > .fullScreenFrame > div,
-        .main .element-container:nth-of-type(4) > .fullScreenFrame > div {
-            width: 200px !important;
-        }
+        .main .element-container:nth-of-type(4) > .fullScreenFrame > div {{
+            width: {image_width}px !important;
+        }}
     </style>
     """
 
