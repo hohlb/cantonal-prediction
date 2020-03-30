@@ -27,8 +27,10 @@ def create_inputs(sidebar):
 
     # visual separation
     sidebar.markdown('')
+    sidebar.markdown('')
+    sidebar.markdown('')
 
-    hospitalized = sidebar.slider('Percentage of Hospitalized Cases',
+    hospitalized = sidebar.slider('Hospitalized Cases (percentage)',
               min_value=eq.HOSPITALIZED_CASES_PERCENTAGE__MIN,
               max_value=eq.HOSPITALIZED_CASES_PERCENTAGE__MAX,
               value=eq.HOSPITALIZED_CASES_PERCENTAGE__DEFAULT)
