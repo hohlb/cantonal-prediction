@@ -63,4 +63,10 @@ def create_sidebar(data):
 
     inputs = canton, *create_inputs(sidebar)
 
+    # visual separation
+    sidebar.markdown('')
+    sidebar.markdown('')
+
+    sidebar.markdown('[This project is open-source](https://github.com/hohlb/cantonal-prediction)')
+
     return inputs
