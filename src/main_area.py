@@ -10,9 +10,8 @@ def create_main_area(data, canton, masks, gloves_pair, sanitizer, hospitalized):
 
     st.title('COVID19 Equipment Predictor')
 
-    st.write(f"Selected Region: {canton}")
-
     st.markdown(f"## Needed Equipment on {day}")
+    st.write(f"Region: {canton}")
 
     place_icons(needed_equipment)
 
