@@ -3,12 +3,12 @@ import streamlit as st
 from src.calc_equip import calculate_needed_equipment
 
 
-def create_main_area(data, canton, masks, gloves_pair, sanitizer):
+def create_main_area(data, canton, masks, gloves_pair, sanitizer, hospitalized):
     st.title('COVID19 Equipment Predictor')
 
     st.write(f"Selected Region: {canton}")
 
-    needed_equipment = calculate_needed_equipment(data, canton, masks, gloves_pair, sanitizer)
+    needed_equipment = calculate_needed_equipment(data, canton, masks, gloves_pair, sanitizer, hospitalized)
     place_icons(needed_equipment)
     st.write(needed_equipment)
 

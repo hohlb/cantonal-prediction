@@ -1,17 +1,19 @@
 import pandas as pd
 
 
-def calc_equip(data, ratio_dict):
+def calc_equip(data, equip, hospitalized_percentage):
     '''provides rows with prediction results'''
     pd.to_numeric(data['ncumul_conf'])
 
-    for key, value in ratio_dict.items():
-        data[key] = data['ncumul_conf'].apply(lambda x: value * x)
+    hospitalized_ratio = hospitalized_percentage / 100
+
+    for key, value in equip.items():
+        data[key] = data['ncumul_conf'].apply(lambda x: value * x * hospitalized_ratio)
 
     return data
 
 
-def calculate_needed_equipment(data, canton, masks, gloves_pair, sanitizer):
+def calculate_needed_equipment(data, canton, masks, gloves_pair, sanitizer, hospitalized):
     # filter by canton
     region_data = data[data['abbreviation_canton_and_fl'] == canton]
 
@@ -21,7 +23,7 @@ def calculate_needed_equipment(data, canton, masks, gloves_pair, sanitizer):
         'sanitizers': sanitizer
     }
 
-    needed_equip = calc_equip(region_data, equip)
+    needed_equip = calc_equip(region_data, equip, hospitalized)
 
     # show needed equipment for the newest time period
     days = 7

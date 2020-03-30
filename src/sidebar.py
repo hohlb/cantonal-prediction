@@ -1,8 +1,8 @@
 import streamlit as st
-import src.equipment as eq
+import src.constants as eq
 
 
-def create_equipment_inputs(sidebar):
+def create_inputs(sidebar):
     masks = sidebar.slider('Masks (per day and patient)',
               min_value=eq.MASKS__PER_DAY_PER_PER_PATIENT__MIN,
               max_value=eq.MASKS__PER_DAY_PER_PER_PATIENT__MAX,
@@ -19,7 +19,12 @@ def create_equipment_inputs(sidebar):
               value=eq.SANITIZER_UNITS__PER_DAY_PER_PER_PATIENT__DEFAULT,
               step=eq.SANITIZER_UNITS__PER_DAY_PER_PER_PATIENT__STEP)
 
-    return masks, gloves_pair, sanitizer
+    hospitalized = sidebar.slider('Percentage of Hospitalized Cases',
+              min_value=eq.HOSPITALIZED_CASES_PERCENTAGE__MIN,
+              max_value=eq.HOSPITALIZED_CASES_PERCENTAGE__MAX,
+              value=eq.HOSPITALIZED_CASES_PERCENTAGE__DEFAULT)
+
+    return masks, gloves_pair, sanitizer, hospitalized
 
 
 def create_canton_selector(sidebar, data):
@@ -35,6 +40,6 @@ def create_sidebar(data):
     sidebar.markdown("# Frame")
 
     canton = create_canton_selector(sidebar, data)
-    masks, gloves_pair, sanitizer = create_equipment_inputs(sidebar)
+    inputs = canton, *create_inputs(sidebar)
 
-    return canton, masks, gloves_pair, sanitizer
+    return inputs
