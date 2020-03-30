@@ -31,7 +31,8 @@ def pre_process(data):
 
     data['released_cases'] = data['ncumul_released'].fillna(method='ffill').fillna(0)
     data['deceased_cases'] = data['ncumul_deceased'].fillna(method='ffill').fillna(0)
-    data['active_cases'] = data['ncumul_conf'] - data['released_cases'] - data['deceased_cases']
+    data['active_cases'] = data['ncumul_conf'].fillna(method='ffill').fillna(0) - data['released_cases'] - data['deceased_cases']
+    data['active_cases'][data['active_cases'] < 0] = 0
 
     data.sort_values(by=['date'], inplace = True)
 
