@@ -8,7 +8,7 @@ def create_equipment_inputs(sidebar):
               max_value=eq.MASKS__PER_DAY_PER_COWORKER_PER_PATIENT__MAX,
               value=eq.MASKS__PER_DAY_PER_COWORKER_PER_PATIENT__DEFAULT)
 
-    gloves_pair = sidebar.slider('Pair of Gloves (per day, coworker, and patient)',
+    gloves_pair = sidebar.slider('Pairs of Gloves (per day, coworker, and patient)',
               min_value=eq.GLOVES_PAIR__PER_DAY_PER_COWORKER_PER_PATIENT__MIN,
               max_value=eq.GLOVES_PAIR__PER_DAY_PER_COWORKER_PER_PATIENT__MAX,
               value=eq.GLOVES_PAIR__PER_DAY_PER_COWORKER_PER_PATIENT__DEFAULT)
