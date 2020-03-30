@@ -29,7 +29,7 @@ def calculate_needed_equipment(data, canton, masks, gloves_pair, sanitizer, hosp
     days = 7
     recent_period = needed_equip.tail(days)
     recent_period = recent_period[[
-        'masks', 'gloves_pairs', 'sanitizers'
+        'masks', 'gloves_pairs', 'sanitizers', 'ncumul_conf'
     ]]
 
     return recent_period

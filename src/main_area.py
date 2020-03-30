@@ -15,7 +15,15 @@ def create_main_area(data, canton, masks, gloves_pair, sanitizer, hospitalized):
 
     place_icons(needed_equipment)
 
-    st.write(needed_equipment)
+    display_cases(needed_equipment)
+
+
+def display_cases(needed_equipment):
+    cases = needed_equipment['ncumul_conf']
+    cases = cases.rename('Cases')
+
+    st.markdown(f"### Cases development")
+    st.bar_chart(cases)
 
 
 def get_furthest_prediction(needed_equipment):
