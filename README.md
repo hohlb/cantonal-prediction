@@ -15,7 +15,7 @@ Then, install the Python dependencies:
 
 If you are using Python 3.6 or higher:
 ```bash
-# change to codebase directory
+# change to this codebase directory that you just downloaded
 cd cantonal-prediction
 
 # create a virtual Python environment named "venv" in this directory
@@ -30,7 +30,7 @@ pip install -r requirements.txt
 
 **Or** if you want to use `conda`:
 ```bash
-# change to codebase directory
+# change to this codebase directory that you just downloaded
 cd cantonal-prediction
 
 # create a new conda environment in this directory
@@ -50,6 +50,17 @@ pip install -r requirements.txt
 
 On your developer's PC, run this from the command line:
 ```bash
+# change to this codebase directory
+cd cantonal-prediction
+
+# activate the virtual Python environment
+#
+# if you used "venv" in the previous step:
+source venv/bin/activate
+# or alternatively, if you used "conda":
+conda activate conda-env/
+
+# run the streamlit development web server
 streamlit run cantonal_prediction.py
 ```
 
