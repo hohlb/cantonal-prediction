@@ -18,10 +18,10 @@ def create_main_area(data, canton, masks, gloves_pair, sanitizer, hospitalized):
 
     place_icons(needed_equipment)
 
-    display_cases(needed_equipment)
+    display_cases(needed_equipment, canton)
 
 
-def display_cases(needed_equipment):
+def display_cases(needed_equipment, canton):
     cases = needed_equipment['active_cases']
     cases = cases.rename('Cases')
 
@@ -30,7 +30,7 @@ def display_cases(needed_equipment):
     st.markdown('')
     st.markdown('')
 
-    st.text("Currently Active Cases")
+    st.text(f"Cases in {canton}")
     st.bar_chart(cases)
 
 
