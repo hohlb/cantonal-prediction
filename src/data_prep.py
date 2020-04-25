@@ -72,7 +72,7 @@ def predict(data):
             add = [{
                     'date': growth_values_dict[canton][-1:].index[0] + datetime.timedelta(days=1),
                     'abbreviation_canton_and_fl' : canton,
-                    'ncumul_conf' : int(growth_rate_dict[canton] * (growth_values_dict[canton][-1])) if growth_rate_dict[canton] is not np.nan else 0,
+                    'ncumul_conf' : int(growth_rate_dict[canton] * (growth_values_dict[canton][-1])) if not np.isnan(growth_rate_dict[canton]) else 0,
                     'prediction' : 1
             }]
             data = data.append(add)
