@@ -7,6 +7,13 @@ Online demo: https://cantonal-prediction.herokuapp.com/
 This app was developed during the [#CodeVsCOVID19 hackathon](https://www.codevscovid19.org/).
 
 
+# Technologies Used
+
+* Web framework: [Streamlit](https://www.streamlit.io)
+* Data wrangling: [Pandas](https://pandas.pydata.org)
+* Dataset: [COVID19 case numbers Cantons of Switzerland](https://github.com/openZH/covid_19)
+
+
 # Setup for Development
 
 First, download or `git clone` this repository to your PC.
