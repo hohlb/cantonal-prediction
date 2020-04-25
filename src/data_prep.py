@@ -69,13 +69,16 @@ def predict(data):
         #         last_reliable_number = growth_rate_dict['CH'] * last_reliable_number
         #         data = data.append(add)
         # else:
-            ncumul_conf = int(growth_rate_dict[canton] * (growth_values_dict[canton][-1]))
+            ncumul_conf = growth_rate_dict[canton] * (growth_values_dict[canton][-1])
+            ncumul_conf = int(ncumul_conf) if not np.isnan(ncumul_conf) else 0
+
             add = [{
                     'date': growth_values_dict[canton][-1:].index[0] + datetime.timedelta(days=1),
                     'abbreviation_canton_and_fl' : canton,
-                    'ncumul_conf' : ncumul_conf if not np.isnan(ncumul_conf) else 0,
+                    'ncumul_conf' : ncumul_conf,
                     'prediction' : 1
             }]
+
             data = data.append(add)
 
     data.sort_values(by=['date'], inplace = True)
