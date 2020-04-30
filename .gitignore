@@ -4,7 +4,6 @@
 .idea
 
 # Python environments
-conda-env/*
-venv/*
+.venv
 
 src/__pycache__/*

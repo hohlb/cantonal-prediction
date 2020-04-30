@@ -25,11 +25,11 @@ If you are using Python 3.6 or higher:
 # change to this codebase directory that you just downloaded
 cd cantonal-prediction
 
-# create a virtual Python environment named "venv" in this directory
-python3 -m venv venv
+# create a virtual Python environment named ".venv" in this directory
+python3 -m venv .venv
 
 # activate the virtual Python environment we just created
-source venv/bin/activate
+source .venv/bin/activate
 
 # install the Python packages
 pip install -r requirements.txt
@@ -41,8 +41,8 @@ pip install -r requirements.txt
 cd cantonal-prediction
 
 # create a new conda environment in this directory
-conda create --prefix ./conda-env
-conda activate conda-env/
+conda create --prefix ./.venv
+conda activate .venv/
 conda config --env --add channels conda-forge
 
 # use Python 3.8
@@ -63,9 +63,9 @@ cd cantonal-prediction
 # activate the virtual Python environment
 #
 # if you used "venv" in the previous step:
-source venv/bin/activate
+source .venv/bin/activate
 # or alternatively, if you used "conda":
-conda activate conda-env/
+conda activate .venv/
 
 # run the streamlit development web server
 streamlit run cantonal_prediction.py
