@@ -32,10 +32,10 @@ python3 -m venv .venv
 source .venv/bin/activate
 
 # update the package manager
-python -m pip install --upgrade pip
+python3 -m pip install --upgrade pip
 
 # install the Python packages
-python -m pip install -r requirements.txt
+python3 -m pip install -r requirements.txt
 ```
 
 **Or** if you want to use `conda`:
@@ -55,7 +55,7 @@ conda config --env --add channels conda-forge
 conda install python=3.8
 
 # install the Python packages
-pip install -r requirements.txt
+python3 -m pip install -r requirements.txt
 ```
 
 
