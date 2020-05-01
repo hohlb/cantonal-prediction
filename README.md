@@ -31,14 +31,20 @@ python3 -m venv .venv
 # activate the virtual Python environment we just created
 source .venv/bin/activate
 
+# update the package manager
+python -m pip install --upgrade pip
+
 # install the Python packages
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 
 **Or** if you want to use `conda`:
 ```bash
 # change to this codebase directory that you just downloaded
 cd cantonal-prediction
+
+# update the package (and environment) manager
+conda update conda
 
 # create a new conda environment in this directory
 conda create --prefix ./.venv
