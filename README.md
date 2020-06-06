@@ -1,4 +1,4 @@
-# Goal
+# Medical Equipment Predictor
 
 Predict the needed medical equipment against the coronavirus for every canton of Switzerland.
 
@@ -80,7 +80,7 @@ streamlit run cantonal_prediction.py
 This will produce an URL that you can access in your web browser to use the app.
 
 
-# Deployment (for future reference)
+# Deployment
 
 This web app will be deployed automatically
 to https://cantonal-prediction.herokuapp.com/ with every code commit to this GitHub repository.
