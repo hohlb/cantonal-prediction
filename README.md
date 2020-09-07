@@ -4,7 +4,7 @@ Predict the needed medical equipment against the coronavirus for every canton of
 
 Online demo: https://cantonal-prediction.herokuapp.com/
 
-This app was developed during the [#CodeVsCOVID19 hackathon](https://www.codevscovid19.org/).
+_This app was developed during the [#CodeVsCOVID19 hackathon](https://www.codevscovid19.org/) together with [@danielbarco](https://github.com/danielbarco) and  [@aysealemdar](https://github.com/aysealemdar)._
 
 
 # Technologies Used
