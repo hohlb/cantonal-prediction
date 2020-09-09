@@ -9,12 +9,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
 
       - name: Deploy to Heroku
         env:
           HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN }}
           HEROKU_APP_NAME: "cantonal-prediction"
         run: |
-          git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
-          git push heroku HEAD:master --force
+          git fetch --prune --unshallow
+          git push --force https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git origin/master:master
