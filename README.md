@@ -85,8 +85,7 @@ This will produce an URL that you can access in your web browser to use the app.
 This web app will be deployed automatically
 to https://cantonal-prediction.herokuapp.com/ with every code commit to this GitHub repository.
 
-The automatic deployment was set up via the Heroku dashboard.
-This works even using Heroku's free tier ✨
+The automatic deployment was set up via the GitHub actions, see the configuration file `.github/workflows/heroku.yml`.
 
 To configure the Heroku runtime, the files `Procfile`, `requirements.txt`, and `runtime.txt` of
 this repository are used.
